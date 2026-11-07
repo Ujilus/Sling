@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://ubqvwwio2n8m"]
+
+[ext_resource type="Script" uid="uid://pnkx6r7ixwks" path="res://Scripts/button.gd" id="1_0kpiu"]
+[ext_resource type="Texture2D" uid="uid://veqn8bbwqk0i" path="res://Assets/Button/not_pressed.png" id="3_iju5o"]
+[ext_resource type="Texture2D" uid="uid://bqk0orwm0t158" path="res://Assets/Button/pressed.png" id="4_edukx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4amfo"]
+size = Vector2(20, 4)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_svtet"]
+atlas = ExtResource("3_iju5o")
+region = Rect2(0, 0, 32, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lt4la"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_svtet")
+}],
+"loop": true,
+"name": &"Normal",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_edukx")
+}],
+"loop": true,
+"name": &"Pressed",
+"speed": 5.0
+}]
+
+[node name="Button" type="Node2D" unique_id=633832811]
+z_index = 48
+script = ExtResource("1_0kpiu")
+ID = "Id"
+color = Color(1, 0, 0, 1)
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1270187452]
+collision_layer = 0
+collision_mask = 136
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=2106128449]
+position = Vector2(0, -6)
+shape = SubResource("RectangleShape2D_4amfo")
+debug_color = Color(0.627451, 0.5294118, 0.07450981, 0)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=55807607]
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_lt4la")
+animation = &"Normal"
+autoplay = "Normal"
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_body_entered"]
+[connection signal="body_shape_entered" from="Area2D" to="." method="_on__body_entered"]

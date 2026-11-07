@@ -1,0 +1,86 @@
+[gd_scene format=3 uid="uid://uom40tnsntnp"]
+
+[ext_resource type="FontFile" uid="uid://c3fwo5s0n186l" path="res://Assets/Fonts/PressStart2P-Regular.ttf" id="1_nkmh8"]
+[ext_resource type="Script" uid="uid://naqrjp0s717y" path="res://Scripts/Menu Items/option_button.gd" id="2_bscev"]
+[ext_resource type="Script" uid="uid://brevoaj1ssof4" path="res://Scripts/Menu Items/volume.gd" id="3_bscev"]
+[ext_resource type="Script" uid="uid://yut7els1by7l" path="res://Scripts/Menu Items/main_menu.gd" id="3_cl26u"]
+
+[node name="Settings" type="Control" unique_id=1440524902]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=57895971]
+
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=1521778457]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -264.0
+offset_top = 26.0
+offset_right = 264.0
+offset_bottom = 92.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("1_nkmh8")
+theme_override_font_sizes/font_size = 66
+text = "Settings"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer" unique_id=930087466]
+offset_left = 426.0
+offset_top = 282.0
+offset_right = 466.0
+offset_bottom = 322.0
+
+[node name="OptionButton" type="OptionButton" parent="CanvasLayer/VBoxContainer" unique_id=1459029545]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+button_mask = 7
+selected = 0
+allow_reselect = true
+item_count = 2
+popup/item_0/text = "Controller"
+popup/item_0/id = 0
+popup/item_1/text = "Keyboard"
+popup/item_1/id = 1
+script = ExtResource("2_bscev")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer" unique_id=1085650553]
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+focus_mode = 2
+focus_behavior_recursive = 1
+alignment = 1
+
+[node name="Volume" type="HSlider" parent="CanvasLayer/VBoxContainer/HBoxContainer" unique_id=973389289 node_paths=PackedStringArray("shortcut_context")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+focus_behavior_recursive = 2
+mouse_default_cursor_shape = 10
+shortcut_context = NodePath("..")
+max_value = 1.0
+step = 0.05
+value = 0.8
+scrollable = false
+tick_count = 10
+ticks_on_borders = true
+script = ExtResource("3_bscev")
+
+[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer" unique_id=1789075707]
+layout_mode = 2
+text = "% Volume"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="CanvasLayer/VBoxContainer" unique_id=1063565425]
+layout_mode = 2
+theme_override_font_sizes/font_size = 31
+text = "Back to Main Menu"
+script = ExtResource("3_cl26u")
+
+[connection signal="item_selected" from="CanvasLayer/VBoxContainer/OptionButton" to="CanvasLayer/VBoxContainer/OptionButton" method="_on_item_selected"]
+[connection signal="value_changed" from="CanvasLayer/VBoxContainer/HBoxContainer/Volume" to="CanvasLayer/VBoxContainer/HBoxContainer/Volume" method="_on_value_changed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/Button" to="CanvasLayer/VBoxContainer/Button" method="_on_pressed"]

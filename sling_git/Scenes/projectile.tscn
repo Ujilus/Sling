@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://bjbxcx8jl41pr"]
+
+[ext_resource type="Script" uid="uid://cn5ak3fti568y" path="res://Scripts/projectile.gd" id="1_qxf0c"]
+[ext_resource type="Texture2D" uid="uid://bxd2tcr3cl41q" path="res://Assets/Rock/Rock.png" id="2_yr2qt"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qxf0c"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_yr2qt")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dgwo2"]
+radius = 4.7
+
+[node name="projectile" type="RigidBody2D" unique_id=2052626671]
+z_index = 28
+collision_layer = 128
+collision_mask = 129
+mass = 0.206
+linear_damp = 0.439
+script = ExtResource("1_qxf0c")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1034568886]
+position = Vector2(0.14115906, -0.23526716)
+scale = Vector2(0.5, 0.50000006)
+sprite_frames = SubResource("SpriteFrames_qxf0c")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=309707020]
+shape = SubResource("CircleShape2D_dgwo2")
+debug_color = Color(0.7679397, 0.4469381, 0.0071551176, 0.41960785)
+
+[node name="Timer" type="Timer" parent="." unique_id=399493008]
+wait_time = 2.0
+autostart = true
+
+[connection signal="tree_entered" from="." to="." method="_on_tree_entered" flags=18]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
